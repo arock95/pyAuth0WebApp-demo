@@ -2,10 +2,10 @@ from functools import wraps
 import json
 from os import environ as env
 from os.path import join, dirname
-from werkzeug.exceptions import HTTPException
+# from werkzeug.exceptions import HTTPException
 
-from dotenv import load_dotenv, find_dotenv
-from flask import Flask, jsonify, redirect, render_template, session, url_for
+from dotenv import load_dotenv
+from flask import Flask, redirect, render_template, session, url_for
 from authlib.integrations.flask_client import OAuth
 from six.moves.urllib.parse import urlencode
 
@@ -38,7 +38,7 @@ def callback_handling():
 
     session['jwt_payload'] = userinfo
     session['profile'] = {
-        'user_id':userinfo['sub'],
+        'user_id': userinfo['sub'],
         'name': userinfo['name'],
         'picture': userinfo['picture']
     }
@@ -47,7 +47,8 @@ def callback_handling():
 
 @app.route('/login')
 def login():
-    return auth0.authorize_redirect(redirect_uri='https://pythonauth0test.herokuapp.com/callback')
+    return auth0.authorize_redirect(
+        redirect_uri='https://pythonauth0test.herokuapp.com/callback')
 
 
 def requires_auth(f):
@@ -64,7 +65,8 @@ def requires_auth(f):
 def dashboard():
     return render_template('dashboard.html',
                            userinfo=session['profile'],
-                           userinfo_pretty=json.dumps(session['jwt_payload'], indent=4))
+                           userinfo_pretty=json.dumps(
+                               session['jwt_payload'], indent=4))
 
 
 @app.route('/logout')
@@ -72,7 +74,8 @@ def logout():
     # Clear session stored data
     session.clear()
     # Redirect user to logout endpoint
-    params = {'returnTo': url_for('home', _external=True), 'client_id': env.get("client_id")}
+    params = {'returnTo': url_for('home', _external=True),
+              'client_id': env.get("client_id")}
     return redirect(auth0.api_base_url + '/v2/logout?' + urlencode(params))
 
 
