@@ -47,7 +47,7 @@ def callback_handling():
 
 @app.route('/login')
 def login():
-    return auth0.authorize_redirect(redirect_uri='http://localhost:5000/callback')
+    return auth0.authorize_redirect(redirect_uri='https://pythonauth0test.herokuapp.com/callback')
 
 
 def requires_auth(f):
