@@ -21,9 +21,7 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
-
     # Runs a single command using the runners shell
-    - name: Deploy to Heroku
     - uses: AkhileshNS/heroku-deploy@v3.4.6
       with:
         # This will be used for authentication. You can find it in your heroku homepage account settings
