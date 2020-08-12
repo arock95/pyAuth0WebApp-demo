@@ -47,7 +47,6 @@ def callback_handling():
 
 @app.route('/login')
 def login():
-    print(request.url_root)
     return auth0.authorize_redirect(
         redirect_uri=f'{request.url_root}callback')
 
@@ -82,4 +81,4 @@ def logout():
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    return render_template('home.html', env_var=env.get("secret_key"))
