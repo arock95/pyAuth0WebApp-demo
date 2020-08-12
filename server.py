@@ -5,7 +5,7 @@ from os.path import join, dirname
 # from werkzeug.exceptions import HTTPException
 
 from dotenv import load_dotenv
-from flask import Flask, redirect, render_template, session, url_for
+from flask import Flask, redirect, render_template, session, url_for, request
 from authlib.integrations.flask_client import OAuth
 from six.moves.urllib.parse import urlencode
 
@@ -47,8 +47,9 @@ def callback_handling():
 
 @app.route('/login')
 def login():
+    print(request.url_root)
     return auth0.authorize_redirect(
-        redirect_uri='https://pythonauth0test.herokuapp.com/callback')
+        redirect_uri=f'{request.url_root}callback')
 
 
 def requires_auth(f):
