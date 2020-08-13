@@ -6,4 +6,4 @@
 
 ![example workflow name](https://github.com/arock95/pyAuth0WebApp-demo/workflows/Scan%20and%20Deploy%20to%20Heroku/badge.svg)
 
-
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=arock95_pyAuth0WebApp-demo&metric=alert_status)](https://sonarcloud.io/dashboard?id=arock95_pyAuth0WebApp-demo)
