@@ -32,3 +32,8 @@ jobs:
         app-name: 'pyauth0web'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_f58893df9846421db2cf03dabad64fc5 }}
+        
+    - name: OWASP ZAP Baseline Scan
+      uses: zaproxy/action-baseline@v0.3.0
+      with:
+        target: "https://pyauth0web.azurewebsites.net"
